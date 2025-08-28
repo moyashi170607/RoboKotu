@@ -1,0 +1,11 @@
+version: "3"  # Composeファイルのバージョン
+services:   # serviceはこの中に記述します。
+  app:   # Service名
+    image: node:alpine   # Dockerイメージを指定します。
+    container_name: node   # Dockerコンテナ名 
+    working_dir: /usr/src/app  # 作業ディレクトリの指定
+    volumes:
+    - type: bind   # マウントタイプ
+      source: ./app   # マウント先
+      target: /usr/src/app   # マウントされるコンテナのパス
+    tty: true   # コンテナを起動させ続ける。
