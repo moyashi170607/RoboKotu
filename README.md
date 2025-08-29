@@ -1,4 +1,7 @@
-# RoboKotu
+# RoboKotu ロボコツ
+
+<img width="256" src="img/icon.jpg">
+
 
 ## 概要
 RoboKotuはNostr上で動作するbotです。
@@ -12,3 +15,6 @@ RoboKotuはNostr上で動作するbotです。
 | 投稿内容 | 内容 | 関連するフォルダ・ファイル |
 | :--- | :--- | :--- |
 | ガチャ | 1/100で当たりが出るガチャ。結果に応じてNIP-58でバッジが贈呈される | src/gacha/ |
+
+## さいごに
+機能追加案などがあれば、issueやPRで教えてくださるとありがたいです。
