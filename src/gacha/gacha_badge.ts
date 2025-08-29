@@ -1,3 +1,5 @@
+//バッジを定義する用のスクリプト
+
 import { finalizeEvent, SimplePool, type EventTemplate } from "nostr-tools";
 import { generateBadgeDefinitionEventTemplate, type BadgeDefinition } from "nostr-tools/nip58"
 import { RELAYS, SK_UA } from "../config.ts";

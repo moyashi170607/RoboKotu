@@ -3,6 +3,7 @@ import dotenv from "dotenv"
 
 dotenv.config();
 
+//取得、投稿に用いるリレー一覧
 export const RELAYS: string[] = [
     //"wss://relay.nostr.band",
     //"wss://nos.lol",
@@ -16,11 +17,13 @@ export const RELAYS: string[] = [
     "wss://relay-jp.nostr.wirednet.jp/"
 ]
 
+//秘密鍵を環境変数から取得
 if (!process.env.SEC_KEY) {
     throw new Error("SEC_KEY environment variable is not defined");
 }
 export const SK_UA: Uint8Array<ArrayBufferLike> = hexToBytes(process.env.SEC_KEY);
 
+//公開鍵(HEX形式)を環境変数から取得
 if (!process.env.PUB_KEY) {
     throw new Error("SEC_KEY environment variable is not defined");
 }

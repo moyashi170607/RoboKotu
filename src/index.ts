@@ -1,54 +1,29 @@
 import { finalizeEvent, generateSecretKey, getPublicKey, type VerifiedEvent } from 'nostr-tools/pure'
 import { SimplePool } from 'nostr-tools/pool'
 import { PK_HEX, RELAYS, SK_UA } from "./config.ts";
-import { type EventTemplate } from "nostr-tools"
 import { gacha } from "./gacha/gacha.ts";
 import { replyToUser } from "./reply.ts";
 
-let bot_user: string[] = [
-    ""
-]
-
 const pool = new SimplePool()
 
-function ReplyTemplate(content:string,post:string,author:string):EventTemplate{
-    let rt:EventTemplate = {
-        kind:1,
-        content:content,
-        created_at: Math.floor(Date.now() / 1000),
-        tags: [
-            [
-                "e",
-                post,
-                "",
-                "root"
-            ],
-            [
-                "p",
-                author
-            ]
-        ]
-    }
-
-    return rt
-}
-
-
+//botが投稿を取得する
 const sub = pool.subscribe(
     RELAYS,
     {
         kinds: [1], // テキスト投稿
         limit: 0,  // 古い投稿を10件取得
-        "#p": [PK_HEX]
+        "#p": [PK_HEX] //自分がメンションされているものを取得
     },
     {
         // 新しいイベントが届くたびに実行
         async onevent(event) {
             if (!event.tags.some(tag => tag[0] === 'e')){
                 if(event.content.includes("ガチャ")){
+                    //ガチャを実行
                     await gacha(event.id,event.pubkey);
                 }else{
-                    const sign:VerifiedEvent = await replyToUser("返信を受け取りました。",event.id,event.pubkey)
+                    //何にも該当しないもの
+                    const sign:VerifiedEvent = await replyToUser("こんにちは！",event.id,event.pubkey)
                     console.log(sign);
                 }
                 

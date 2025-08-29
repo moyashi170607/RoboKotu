@@ -3,6 +3,17 @@ import { RELAYS, SK_UA } from "./config.ts";
 
 const pool = new SimplePool()
 
+/**
+ * ユーザーに返信イベントを送信します。
+ * この関数は、指定されたコンテンツ、元のイベントID、および受信者の公開鍵を使用して、Nostrの返信イベントを作成します。
+ * イベントに署名し、定義済みのリレーのリストに公開します。
+ * 公開後、署名されたイベントを返します。
+ *
+ * @param {string} content 返信イベントのテキストコンテンツ。
+ * @param {string} root_id 返信の対象となる元のイベントID。
+ * @param {string} recipient 返信イベントの宛先となるユーザーの公開鍵。
+ * @returns {Promise<VerifiedEvent>} 公開後に署名されたイベント。
+ */
 export async function replyToUser(content: string, root_id: string, recipient: string): Promise<VerifiedEvent> {
     const reply: EventTemplate = {
         content: content,

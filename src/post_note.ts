@@ -1,26 +1,9 @@
-import dotenv from "dotenv";
+//テスト投稿用のスクリプト
+
 import { finalizeEvent, SimplePool, type EventTemplate } from "nostr-tools";
-import { hexToBytes } from "nostr-tools/utils";
-import { SK_UA } from "./config.ts";
-
-
-dotenv.config();
+import { RELAYS, SK_UA } from "./config.ts";
 
 const pool = new SimplePool()
-
-const RELAYS: string[] = [
-    //"wss://relay.nostr.band",
-    //"wss://nos.lol",
-    //"wss://relay.damus.io",
-    //"wss://nos.lol",
-    "wss://yabu.me",
-    "wss://r.kojira.io",
-    //"wss://nrelay-jp.c-stellar.net",
-    //"wss://nostr-relay.nokotaro.com",
-    //"wss://relay.snort.social",
-    "wss://kotukonostr.onrender.com",
-    "wss://relay-jp.nostr.wirednet.jp/"
-]
 
 const CONTENT = "botのテスト投稿です。";
 
